@@ -1,0 +1,140 @@
+*{
+  box-sizing: content-box;
+}
+
+.container {
+  display:flex;
+  flex-direction:column;
+}
+
+.headcontainer{
+  display:flex;
+  flex-direction:row;
+}
+
+.petselect {
+  margin: 2px 1px;
+  padding: 10px;
+  width:60%;
+  display:flex;
+  flex-direction:column;
+  min-width:244px;
+  max-width:244px;
+}
+
+.petgetpic {
+ margin:20px;
+}
+
+.getpet {
+  display:flex;
+  flex-direction:row;
+}
+
+.petinfo {
+  padding:10px;
+  font-family: 'Noto Sans TC', cursive, sans-serif;
+  font-size:14px;
+  font-weight:200;
+}
+
+.left {
+  display:flex;
+  flex-direction:column;
+}
+
+#petPic {
+  background-color:#E1D0D6;
+}
+
+.petgrade {
+  display:flex;
+  align-items:center;
+  letter-spacing:5px;
+  text-align:center;
+  margin: 5px;
+  border-radius:5%;
+/*  outline: 2px ridge rgba(170, 50, 220, .4); */
+  border-style:groove;
+}
+
+.form-check-input {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-left:8px;
+}
+
+.petpoint {
+  display:flex;
+  align-items:center;
+  align-content:center;
+  justify-content:center;
+  letter-spacing:1px;
+  text-align:center;
+  margin: 5px;
+  border-radius:4%;
+  border-style:groove;
+  min-width:118px;
+}
+
+.petpoint input{
+  margin-left:15px;
+}
+
+.petpointmix {
+  display:flex;
+  align-items:center;
+  align-content:center;
+  justify-items:space-around;
+  justify-content:center;
+  letter-spacing:1px;
+  text-align:center;
+  margin: 5px;
+  padding: 1px 10px;
+  border-radius:5%;
+  border-style:groove;
+  min-width:240px;
+}
+
+.petpointmix input {
+  width:40px;
+  height:20px;
+}
+
+.petpointmix button {
+  width:15px;
+  height:15px;
+}
+
+.petlvselectbox {
+  display:flex;
+  align-items:center;
+  align-content:center;
+  justify-content:center;
+  letter-spacing:1px;
+  text-align:center;
+  margin: 5px;
+  border-radius:3%;
+  border-style:groove;
+  min-width:274px;
+/*   max-width:200px; */
+}
+
+.petlvselecttext {
+  width:50px;
+}
+
+.petlvselectbox table {
+ margin-bottom: 0;
+}
+
+.mode {
+  width:480px;
+  margin:5px;
+}
+
+.manualset {
+  margin:8px;
+  min-width:475px;
+}

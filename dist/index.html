@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Bluecg-PetCal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/opencc-js@0.3.3"></script>
+<script src="https://kit.fontawesome.com/529e79d418.js" crossorigin="anonymous"></script>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"><link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="container">
+  <div class="headcontainer">
+    <div class="left">
+      <div class="mode">
+        <div class="row">
+          <div class="col-10">
+            <div class="list-group list-group-horizontal-sm" id="list-tab" role="tablist">
+              <a class="list-group-item list-group-item-action " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">現有寵物成長檔</a>
+              <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">自行定義成長檔</a>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade " id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="getpet">
+                  <div class="petgetpic">
+                    <div class="petPic">
+                      <img height='100' src="https://cdn.img-conv.gamerch.com/img.gamerch.com/bluecg/1505433152002.gif" alt="#" />
+                    </div>
+                  </div>
+                  <div class="petselect">
+                    <!--等級-->
+                    <div class="pet-lv">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">等級</span>
+                        </div>
+                        <select class="custom-select custom-select-sm">
+                          <option selected>1</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--種族-->
+                    <div class="pet-race">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">種族</span>
+                        </div>
+                        <select id="pet-race" class="custom-select custom-select-sm">
+                          <option selected value="-1">全種族</option>
+                        </select>
+                      </div>
+                    </div>
+                    <!--寵物-->
+                    <div class="pet-Name">
+                      <div class="pet-Name input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">寵物</span>
+                        </div>
+                        <select class="custom-select custom-select-sm" name="ptMenu" id="ptMenu">
+                          <option selected value="-1">Open this select menu</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                <div class="manualset">
+                   <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">體成長</th>
+      <th scope="col">力成長</th>
+      <th scope="col">強成長</th>
+      <th scope="col">敏成長</th>
+      <th scope="col">魔成長</th>
+      <th scope="col">一級倍率</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">輸入</th>
+      <td><input type="text" size="2" maxlength="2" value="0" class="text-info" name="manualvit"></td>
+      <td><input type="text" size="2" maxlength="2" value="0" class="text-info" name="manualstr"></td>
+      <td><input type="text" size="2" maxlength="2" value="0" class="text-info" name="manualdef"></td>
+      <td><input type="text" size="2" maxlength="2" value="0" class="text-info" name="manualdex"></td>
+      <td><input type="text" size="2" maxlength="2" value="0" class="text-info" name="manualint"></td>
+      <td><input type="text" size="2" maxlength="3" value="0.2" class="text-info" name="manualBaseBp"></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="petlvselectbox">
+        <table class="table table-sm ">
+          <thead>
+            <tr>
+              <th scope="col" colspan="1">模擬等級</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="col" colspan="3">
+                <span for="customRange1">Level.</span>
+                <input type="range" class="petlvselect" value="145" min="1" max="145" step="1">
+                <input class="petlvselecttext" type="text" placeholder="145" maxlength="3" min="1" oninput="value=value.replace(/[^\d]/g,'')"  >
+              </td>
+            </tr>
+            <tr>
+              <td class="lvbtn"><button type="button" onclick="ComparisonList();" class="lvbtn btn btn-success btn-sm">Add To Comparison List 【加入比較清單】</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="petgrade">
+      <table class="table table-sm ">
+        <thead>
+          <tr>
+            <th scope="col" colspan="6">掉檔</th>
+          </tr>
+          <tr>
+            <td scope="col"><span>#</span></td>
+            <td><span>-0</span></td>
+            <td><span>-1</span></td>
+            <td><span>-2</span></td>
+            <td><span>-3</span></td>
+            <td><span>-4</span></td>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <th scope="col"><span>體</span></th>
+            <td><input class="vitcheck" type="radio" name="vitradio" id="exampleRadios1" value="0" checked></td>
+            <td><input class="vitcheck" type="radio" name="vitradio" id="exampleRadios1" value="1" ></td>
+            <td><input class="vitcheck" type="radio" name="vitradio" id="exampleRadios1" value="2" ></td>
+            <td><input class="vitcheck" type="radio" name="vitradio" id="exampleRadios1" value="3" ></td>
+            <td><input class="vitcheck" type="radio" name="vitradio" id="exampleRadios1" value="4" ></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>力</span></th>
+            <td><input class="strcheck" type="radio" name="strradio" id="exampleRadios1" value="0" checked></td>
+            <td><input class="strcheck" type="radio" name="strradio" id="exampleRadios1" value="1" ></td>
+            <td><input class="strcheck" type="radio" name="strradio" id="exampleRadios1" value="2" ></td>
+            <td><input class="strcheck" type="radio" name="strradio" id="exampleRadios1" value="3" ></td>
+            <td><input class="strcheck" type="radio" name="strradio" id="exampleRadios1" value="4" ></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>強</span></th>
+            <td><input class="defcheck" type="radio" name="defradio" id="exampleRadios1" value="0" checked></td>
+            <td><input class="defcheck" type="radio" name="defradio" id="exampleRadios1" value="1" ></td>
+            <td><input class="defcheck" type="radio" name="defradio" id="exampleRadios1" value="2" ></td>
+            <td><input class="defcheck" type="radio" name="defradio" id="exampleRadios1" value="3" ></td>
+            <td><input class="defcheck" type="radio" name="defradio" id="exampleRadios1" value="4" ></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>速</span></th>
+            <td><input class="dexcheck" type="radio" name="dexradio" id="exampleRadios1" value="0" checked></td>
+            <td><input class="dexcheck" type="radio" name="dexradio" id="exampleRadios1" value="1" ></td>
+            <td><input class="dexcheck" type="radio" name="dexradio" id="exampleRadios1" value="2" ></td>
+            <td><input class="dexcheck" type="radio" name="dexradio" id="exampleRadios1" value="3" ></td>
+            <td><input class="dexcheck" type="radio" name="dexradio" id="exampleRadios1" value="4" ></td>
+          </tr>
+          <tr>
+            <td scope="col"><span>魔</span></td>
+            <td><input class="intcheck" type="radio" name="intradio" id="exampleRadios1" value="0" checked></td>
+            <td><input class="intcheck" type="radio" name="intradio" id="exampleRadios1" value="1" ></td>
+            <td><input class="intcheck" type="radio" name="intradio" id="exampleRadios1" value="2" ></td>
+            <td><input class="intcheck" type="radio" name="intradio" id="exampleRadios1" value="3" ></td>
+            <td><input class="intcheck" type="radio" name="intradio" id="exampleRadios1" value="4" ></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="petpoint">
+      <table class="table table-sm ">
+        <thead>
+          <tr>
+            <th scope="col" colspan="3">配點</th>
+          </tr>
+          <tr>
+            <td scope="col"><span>#</span></td>
+            <td><span>主點</span></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col"><span>保留</span></th>
+            <td><input class="form-check-input" type="radio" name="mainpoint" id="exampleRadios1" value="keeppoint" checked></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>體</span></th>
+            <td><input class="form-check-input" type="radio" name="mainpoint" id="exampleRadios1" value="vit" ></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>力</span></th>
+            <td><input class="form-check-input" type="radio" name="mainpoint" id="exampleRadios1" value="str" ></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>強</span></th>
+            <td><input class="form-check-input" type="radio" name="mainpoint" id="exampleRadios1" value="def" ></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>速</span></th>
+            <td><input class="form-check-input" type="radio" name="mainpoint" id="exampleRadios1" value="dex" ></td>
+          </tr>
+          <tr>
+            <td scope="col"><span>魔</span></td>
+            <td><input class="form-check-input" type="radio" name="mainpoint" id="exampleRadios1" value="int" ></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="petpointmix">
+      <table class="table table-sm ">
+        <thead>
+          <tr>
+            <th scope="col" colspan="4">混點</th>
+          </tr>
+          <tr>
+            <th scope="col"><span>點數</span>
+            </th>
+            <td scope="col" colspan="3">
+              <input class="points form-control form-control-sm" type="text" value=144 min="0" max="144" readonly="true">
+              </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="col"><span>體</span></th>
+            <td>
+              <input class="form-control form-control-sm" type="number" min="0" max="144" value="0" oninput="if(value>144)value=144;if(value.length>3)value=value.slice(0,2);if(value<0)value=0;petPointTatalCal ()">
+              </td>
+            <td><button name="vitadd" type="button" class="btn btn-outline-info">+</button></td>
+            <td><button name="vitminus" type="button" class="btn btn-outline-info">-</button></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>力</span></th>
+            <td>
+              <input class="form-control form-control-sm" type="number" min="0" max="144" value="0" oninput="if(value>144)value=144;if(value.length>3)value=value.slice(0,2);if(value<0)value=0;petPointTatalCal()">
+            </td>
+            <td><button name="stradd" type="button" class="btn btn-outline-info">+</button></td>
+            <td><button type="strminus" class="btn btn-outline-info">-</button></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>強</span></th>
+            <td><input class="form-control form-control-sm" type="number" min="0" max="144" value="0"          oninput="if(value>144)value=144;if(value.length>3)value=value.slice(0,2);if(value<0)value=0;petPointTatalCal()"> 
+            </td>
+            <td><button type="button" class="btn btn-outline-info">+</button></td>
+            <td><button type="button" class="btn btn-outline-info">-</button></td>
+          </tr>
+          <tr>
+            <th scope="col"><span>速</span></th>
+            <td><input class="form-control form-control-sm" type="number" min="0" max="144" value="0" oninput="if(value>144)value=144;if(value.length>3)value=value.slice(0,2);if(value<0)value=0;petPointTatalCal()"> 
+            </td>
+            <td><button type="button" class="btn btn-outline-info">+</button></td>
+            <td><button type="button" class="btn btn-outline-info">-</button></td>
+          </tr>
+          <tr>
+            <td scope="col"><span>魔</span></td>
+            <td><input class="form-control form-control-sm" type="number" min="0" max="144" value="0" oninput="if(value>144)value=144;if(value.length>3)value=value.slice(0,2);if(value<0)value=0;petPointTatalCal()">
+                       </td>
+            <td><button type="button" class="btn btn-outline-info">+</button></td>
+            <td><button type="button" class="btn btn-outline-info">-</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="accordion" id="accordionExample">
+    <div class="cardforpetinfo">
+      <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fas fa-paw" style="color:#FF9959"></i>
+            <span>&thinsp;寵物資料&thinsp;</span>
+            <i class="fas fa-chevron-down" style="color:#FF9959"></i>
+          </button>
+        </h2>
+      </div>
+
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+          <!--寵物資料-->
+          <div class="petinfo">
+            <table class="table table-striped ">
+              <tbody>
+                <tr>
+                  <td><span>圖鑑編號： </span><span class="cardNum"></span></td>
+                  <td><span>體：</span><span class="bpvit"></span>
+                    <div class="star"><i class="fas fa-star-half"></i></div>
+                  </td>
+                  <td><span>圖鑑：</span><span class="cardlv"></span></td>
+                </tr>
+                <tr>
+                  <td><span>名稱：</span><span class="petname"></span></td>
+                  <td><span>力：</span><span class="btstr"></span>
+                    <div class="star"><i class="fas fa-star"></i></div>
+                  </td>
+                  <td><span>地：</span><span class="petarr1"></span>
+                    <div class="arrcolor"><i class="fas fa-leaf" style="">&ensp;</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span>種族：</span><span class="petrace"></span></td>
+                  <td><span>強：</span><span class="bpdef"></span>
+                    <div class="star"><i class="fas fa-star"></i></div>
+                  </td>
+                  <td><span>水：</span><span class="petarr2"></span>
+                    <div class="arrcolor"><i class="fas fa-tint" style="">&emsp;</i></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span>技能欄：</span><span class="petskilen"></span></td>
+                  <td><span>速：</span><span class="bpdex"></span>
+                    <div class="star"><i class="fas fa-star"></i></div>
+                  </td>
+                  <td><span>火：</span><span class="petarr3"></span>
+                    <div class="arrcolor"><i class="fab fa-gripfire" style="">&ensp;</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span>總成長：</span><span class="bptotal"></span> </td>
+                  <td><span>魔：</span><span class="bpint"></span>
+                    <div class="star"><i class="fas fa-star"></i></div>
+                  </td>
+                  <td><span>風：</span><span class="petarr4"></span>
+                    <div class="arrcolor"><i class="fas fa-cloud" style="">&ensp;</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3"><span>出沒地點：</span><span class="petlocated"></span></td>
+                </tr>
+                <tr>
+                  <td colspan="3"><span>一級點：</span><span class="petbaby"></span> </td>
+                </tr>
+                <tr>
+                  <td colspan="3"><span>附加:</span><span class="petProbability"></span> </td>
+                </tr>
+                <tr>
+                  <td colspan="3"><span>可否封印：</span><span class="petCatch"></span> </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cardforpetpred">
+      <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <i class="fas fa-paw" style="color:#FF4332"></i>
+            <span>&thinsp;成長預測&thinsp;</span>
+            <i class="fas fa-chevron-down" style="color:#FF4332"></i>
+          </button>
+        </h2>
+      </div>
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th class="mainway"scope="col">#</th>
+                <th scope="col">血量</th>
+                <th scope="col">魔量</th>
+                <th scope="col">攻</th>
+                <th scope="col">防</th>
+                <th scope="col">敏</th>
+                <th scope="col">精神</th>
+                <th scope="col">回復</th>
+                <th scope="col">體</th>
+                <th scope="col">力</th>
+                <th scope="col">強</th>
+                <th scope="col">速</th>
+                <th scope="col">魔</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1級預測能力</th>
+                <td><span class="lv1hp">101</span></td>
+                <td><span class="lv1mp">89</span></td>
+                <td><span class="lv1str">49</span></td>
+                <td><span class="lv1def">40</spa></td>
+                <td><span class="lv1dex">35</span></td>
+                <td><span class="lv1spirit">100</span></td>
+                <td><span class="lv1recovery">101</span></td>
+                <td><span class="lv1bpvit">3</span></td>
+                <td><span class="lv1bpstr">9</span></td>
+                <td><span class="lv1bpdef">4</span></td>
+                <td><span class="lv1bpdex">5</span></td>
+                <td><span class="lv1bpint">2</span></td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <span class="predlv">145</span>
+                  <span>級預測能力</span>
+                </th>
+                <td><span class="predhp">1010</span></td>
+                <td><span class="predmp">890</span></td>
+                <td><span class="predstr">490</span></td>
+                <td><span class="preddef">400</spa>
+                </td>
+                <td><span class="preddex">350</span></td>
+                <td><span class="predspi">1000</span></td>
+                <td><span class="predrec">1010</span></td>
+                <td><span class="predbpvit">30</span></td>
+                <td><span class="predbpstr">90</span></td>
+                <td><span class="predbpdef">40</span></td>
+                <td><span class="predbpdex">50</span></td>
+                <td><span class="predbpint">20</span></td>
+              </tr>
+              <tr>
+                <td colspan="13"><span class="predPS"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h2 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+             <i class="fas fa-paw" style="color:#0091DB"></i>
+              <span>&thinsp;比較清單&thinsp;</span>
+            <i class="fas fa-chevron-down" style="color:#0091DB"></i>
+          </button>
+        </h2>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="lists card-body">
+          <!--ComparisonList-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.3/umd/popper.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
