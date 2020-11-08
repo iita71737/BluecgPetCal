@@ -946,9 +946,8 @@ let htmlContent = `
       htmlContent += `
         <tr>
                 <th scope="row">
-                  <span class="predlv">#${petname}</span>
+                  <span class="predlv">-${petEachGrade[0]}${petEachGrade[1]}${petEachGrade[2]}${petEachGrade[3]}${petEachGrade[4]}&thinsp;${petname}</span>
                   <span>${lvtext}級</span>
-                  <span>${petEachGrade[0]}${petEachGrade[1]]}${petEachGrade[2]}${petEachGrade[3]}${petEachGrade[4]}</span>
                   <p>#${ps}</p>
                 </th>`
   listData.forEach((data) => {
