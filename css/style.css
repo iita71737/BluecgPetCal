@@ -5,6 +5,7 @@
 .container {
   display:flex;
   flex-direction:column;
+  margin:10px 0px;
 }
 
 .headcontainer{
@@ -43,6 +44,10 @@
   flex-direction:column;
 }
 
+.lvbtn {
+  margin: 5px;
+}
+
 #petPic {
   background-color:#E1D0D6;
 }
@@ -50,7 +55,7 @@
 .petgrade {
   display:flex;
   align-items:center;
-  letter-spacing:5px;
+  letter-spacing:0px;
   text-align:center;
   margin: 5px;
   border-radius:5%;
@@ -94,7 +99,6 @@
   padding: 1px 10px;
   border-radius:5%;
   border-style:groove;
-  min-width:240px;
 }
 
 .petpointmix input {
@@ -115,7 +119,7 @@
   letter-spacing:1px;
   text-align:center;
   margin: 5px;
-  border-radius:3%;
+  border-radius:5%;
   border-style:groove;
   min-width:274px;
 /*   max-width:200px; */
@@ -138,3 +142,4 @@
   margin:8px;
   min-width:475px;
 }
+
